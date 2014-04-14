@@ -16,12 +16,16 @@ if not initialrequest.status_code == 200:
 else:
 	soup = BeautifulSoup.BeautifulSoup(initialrequest.text)
 	pages = soup.findAll('a', {"class" : "rapidnofollow"})
-	lastpage = str(pages[len(pages)-1]).split(" ")[2].split("=")[1].split('-')[1].replace('"', "")
-	lastpage = int(lastpage)
+	if len(pages) > 1:
+		lastpage = str(pages[len(pages)-1])
+		lastpage = lastpage.split(" ")[2].split("=")[1].split('-')[1].replace('"', "")
+		lastpage = int(lastpage)
+	else:
+		exit('['+Fore.RED+'!'+Fore.RESET+'] fuck off plebe')
 	pages = []
 	for i in range(lastpage):
 		pagenum = i + 1
 		url = 'http://www.flickr.com/photos/{0}/page{1}'.format(userid, pagenum)
 		pages.append(url)
-	'['+Fore.GREEN+'+'+Fore.RESET+'] found %s pages of photos' % str(len(pages))
+	print '['+Fore.GREEN+'+'+Fore.RESET+'] found %s pages of photos' % str(len(pages))
 
