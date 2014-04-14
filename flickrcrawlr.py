@@ -22,4 +22,6 @@ else:
 	for i in range(lastpage):
 		pagenum = i + 1
 		url = 'http://www.flickr.com/photos/{0}/page{1}'.format(userid, pagenum)
-		
+		pages.append(url)
+	'['+Fore.GREEN+'+'+Fore.RESET+'] found %s pages of photos' % str(len(pages))
+
